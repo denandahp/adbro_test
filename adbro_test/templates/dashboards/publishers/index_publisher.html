@@ -1,0 +1,57 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+    Index Publishers
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-title mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">Publisher</h3>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            
+            <div class="overflow-auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th> 
+                            <th>Created</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if not publishers %}
+                            <tr>
+                                <td class="text-center" colspan="4">Tidak ada data pada tabel</td>
+                            </tr>
+                        {% else %}
+                            {% for data in publishers %}        
+                                <tr>
+                                    <td>{{ data.name }}</td>
+                                    <td>{{ data.created }}</td>
+                                    <td>
+                                        <div class="d-md-flex flex-nowrap ">
+                                            <a href="{% url 'dashboards:publishers:add_slot' uuid_publisher=data.guid %}">
+                                                <button class="btn btn-primary btn-sm mx-2">Add Slot</button>
+                                            </a>
+                                            <a href="{% url 'dashboards:publishers:add_site' uuid_publisher=data.guid %}">
+                                                <button class="btn btn-success btn-sm">Add Site</button>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% include "partials/pagination.html" %}
+        </div>
+    </div>
+{% endblock %}

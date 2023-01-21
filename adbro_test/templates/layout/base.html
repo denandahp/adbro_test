@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static "assets/css/font.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "assets/vendors/iconly/bold.css" %}">
+    <link rel="stylesheet" href="{% static "assets/vendors/choices.js/choices.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/vendors/perfect-scrollbar/perfect-scrollbar.css" %}">
+    <link rel="stylesheet" href="{% static "assets/vendors/bootstrap-icons/bootstrap-icons.css" %}">
+    <link rel="stylesheet" href="{% static "assets/vendors/fontawesome/all.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/app.css" %}">
+    {% block styles %}{% endblock %}
+    <link rel="shortcut icon" href="{% static "assets/favicon.ico" %}" type="image/x-icon">
+</head>
+<body>
+    <div id="app">
+        <!-- Sidebar -->
+        {% include "layout/partial/sidebar.html" %}
+
+        <div id="main" class="layout-navbar">
+            <!-- Header -->
+            {% include "layout/partial/header.html" %}
+            
+            <div id="main-content">
+                <div class="page-heading">
+                    <!-- Alert Message -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible show fade">
+                                {{ message|safe }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Content -->
+                    {% block content %}{% endblock %}
+                </div>
+    
+                <!-- Footer -->
+                <footer>
+                    <div class="footer clearfix mb-0 text-muted">
+                        <div class="float-start">
+                            <p><script>document.write(new Date().getFullYear())</script> &copy; Denanda.hendra.p@mail.ugm.ac.id</p>
+                        </div>
+                        <div class="float-end">
+                            <p>Denanda Hendra Pratama</p>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static "assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js" %}"></script>
+    <script src="{% static "assets/js/bootstrap.bundle.min.js" %}"></script>
+    <script src="{% static "assets/vendors/fontawesome/all.min.js" %}"></script>
+    <script src="{% static "assets/vendors/choices.js/choices.min.js" %}"></script>
+    <script src="{% static "assets/js/main.js" %}"></script>
+    <script>
+        // Function Prevent Submit Button
+        const forms = document.querySelectorAll('form')
+
+        if(forms.length > 0) {
+            forms.forEach(form => {
+                form.addEventListener("submit", function(event){
+                    const buttonSubmit = form.querySelector('button[type="submit"]')
+                    buttonSubmit.setAttribute('disabled', true)
+                    buttonSubmit.innerHTML = 'Menyimpan...'
+                })
+            })
+        }
+        
+        // Choices JS
+        const selectDefaults = document.querySelectorAll('.choices-select')
+        const selectDisabled = document.querySelectorAll('.choices-disabled')
+        const selectSearch = document.querySelectorAll('.select-search');
+
+        if(selectDefaults.length > 0) {
+            selectDefaults.forEach(select => {
+                const choicesDefault = new Choices(select, {
+                    addItems: true,
+                    removeItems: true,
+                    removeItemButton: true,
+                })
+            })
+        }
+        if(selectDisabled.length > 0) {
+            selectDisabled.forEach(select => {
+                const choicesDefault = new Choices(select, {
+                    addItems: false,
+                    removeItems: false,
+                }).disable();
+            })
+        }
+        
+        if(selectSearch.length > 0) {
+            selectSearch.forEach(select => {
+                const choicesDefault = new Choices(select, {
+                    searchPlaceholderValue: 'Search Here',
+                });
+            })
+        }
+
+    </script>
+
+    {% block js %}{% endblock %}
+
+</body>
+</html>

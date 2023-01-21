@@ -1,0 +1,55 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+    Index Advertisements
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-title mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">Advertisements</h3>
+            <div class="d-flex flex-nowrap">
+                <a href="{% url 'dashboards:advertisements:create_advertisement' %}">
+                    <button class="btn btn-primary mx-1"><em class="fa fa-plus me-2"></em>Advertisement</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            
+            <div class="overflow-auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>UUID advertisement</th> 
+                            <th>Tags</th> 
+                            <th>Data</th>
+                            <th>created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if not advertisements %}
+                            <tr>
+                                <td class="text-center" colspan="4">Tidak ada data pada tabel</td>
+                            </tr>
+                        {% else %}
+                            {% for data in advertisements %}        
+                                <tr>
+                                    <td>{{ data.advertisement }}</td>
+                                    <td>{{ data.tags }}</td>
+                                    <td>{{ data.data|truncatechars:45 }}</td>
+                                    <td>{{ data.created }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% include "partials/pagination.html" %}
+        </div>
+    </div>
+{% endblock %}
