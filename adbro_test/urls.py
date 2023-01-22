@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from adbro_test.dashboards.publishers.views import index_publisher
+from adbro_test.dashboards.publishers.views import index_publishers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboards/', include('adbro_test.dashboards.urls', namespace='backoffices')),
-    path('',  index_publisher, name='index_publisher'),
+    path('',  index_publishers, name='index_publisher'),
 ]

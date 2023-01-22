@@ -46,12 +46,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-AUTH_USER_MODEL = 'users.users'
-
 # Application definition
 
 INSTALLED_APPS = [
-    'adbro_test.apps.users',
     'adbro_test.apps.advertisements',
     'adbro_test.apps.advertisement_views',
     'adbro_test.apps.publishers',
@@ -103,8 +100,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'adbro_test.wsgi.application'
 
 
-AUTHENTICATION_BACKENDS = ['adbro_test.core.utils.AuthBackend']
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -119,7 +114,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'OPTIONS': {
-            'options': '-c search_path=adbro'
+            'options': '-c search_path=adbro_test'
         },  
         'NAME': 'postgres',
         'USER': 'postgres',

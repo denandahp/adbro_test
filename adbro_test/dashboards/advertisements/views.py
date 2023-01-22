@@ -35,5 +35,6 @@ def create_advertisement(request):
         'form': form,
         'active_tab': 'advertisement',
         'title': 'Add Advertisement',
+        'process': 'Create'
     }
     return render(request, 'dashboards/create.html', context)

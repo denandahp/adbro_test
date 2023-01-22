@@ -18,6 +18,17 @@
                         <span>Publishers</span>
                     </a>
                 </li>
+                <ul class="submenu {% if active_tab == 'publisher' %}active{% endif %}">
+                    <li class="submenu-item {% if active_sub_tab == 'publisher' %}active{% endif %}">
+                        <a href="{% url 'dashboards:publishers:index_publishers' %}">Publishers</a>
+                    </li>
+                    <li class="submenu-item {% if active_sub_tab == 'site' %}active{% endif %}">
+                        <a href="{% url 'dashboards:publishers:index_sites' %}">Sites</a>
+                    </li>
+                    <li class="submenu-item submenu-item {% if active_sub_tab == 'slot' %}active{% endif %}">
+                        <a href="{% url 'dashboards:publishers:index_slots' %}">Slots</a>
+                    </li>
+                </ul>
                 <li class="sidebar-item {% if active_tab == 'advertisement' %}active{% endif %}">
                     <a href="{% url 'dashboards:advertisements:index_advertisement' %}" class='sidebar-link'>
                         <i class="fa fa-shopping-cart fa-sm"></i>
