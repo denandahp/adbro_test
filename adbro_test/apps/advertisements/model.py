@@ -15,7 +15,7 @@ class Advertiser(models.Model):
 
 class Campaign(models.Model):
     guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    advertiser = models.ForeignKey(Advertiser, on_delete=models.CASCADE, related_name='campaigns')
+    advertiser = models.ForeignKey(Advertiser, on_delete=models.CASCADE, related_name='advertisers')
     name = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -25,7 +25,7 @@ class Campaign(models.Model):
 
 class AdvertisementGroup(models.Model):
     guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE, related_name='advertisement_groups')
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE, related_name='campaigns')
     name = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -34,8 +34,8 @@ class AdvertisementGroup(models.Model):
         return self.name
 
 class AdvertisementGroupTargetingRule(models.Model):
-    advertisement_group = models.ForeignKey(AdvertisementGroup, on_delete=models.CASCADE, related_name='targeting_rules')
-    slot = models.ManyToManyField(Slot, related_name='targeting_rules', blank=True)
+    advertisement_group = models.ForeignKey(AdvertisementGroup, on_delete=models.CASCADE, related_name='advertisement_groups')
+    slot = models.ManyToManyField(Slot, related_name='slots', blank=True)
     tags = models.CharField(max_length=255)
     description = models.CharField(max_length=255, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -46,7 +46,7 @@ class AdvertisementGroupTargetingRule(models.Model):
 
 class Advertisement(models.Model):
     guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
-    advertisement_group = models.ForeignKey(AdvertisementGroup, related_name='advertisements', on_delete=models.CASCADE)
+    advertisement_group = models.ForeignKey(AdvertisementGroup, related_name='advertisement_groups', on_delete=models.CASCADE)
     data = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
