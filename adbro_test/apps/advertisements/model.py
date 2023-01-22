@@ -34,7 +34,7 @@ class AdvertisementGroup(models.Model):
         return self.name
 
 class AdvertisementGroupTargetingRule(models.Model):
-    advertisement_group = models.ForeignKey(AdvertisementGroup, on_delete=models.CASCADE, related_name='advertisement_groups')
+    advertisement_group = models.ForeignKey(AdvertisementGroup, on_delete=models.CASCADE, related_name='advertisement_group_targeting_rules')
     slot = models.ManyToManyField(Slot, related_name='slots', blank=True)
     tags = models.CharField(max_length=255)
     description = models.CharField(max_length=255, blank=True, null=True)

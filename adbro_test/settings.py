@@ -114,7 +114,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'OPTIONS': {
-            'options': '-c search_path=adbro_test'
+            'options': '-c search_path=adbro'
         },  
         'NAME': 'postgres',
         'USER': 'postgres',
