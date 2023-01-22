@@ -88,7 +88,7 @@ class Command(BaseCommand):
                     campaign = advertisement_group.campaign
 
                     # Get all targeting rules from advertisement_group to get slot data
-                    targeting_rules = advertisement_group.targeting_rules.all()
+                    targeting_rules = advertisement_group.advertisement_group_targeting_rules.all()
                     for targeting_rule in targeting_rules:
                         slots = targeting_rule.slot.all()
                         for slot in slots:

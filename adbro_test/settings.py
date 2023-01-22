@@ -49,10 +49,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'adbro_test.apps.advertisements',
-    'adbro_test.apps.advertisement_views',
-    'adbro_test.apps.publishers',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -62,6 +58,9 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
+    'adbro_test.apps.advertisement_views',
+    'adbro_test.apps.publishers',
+    'adbro_test.apps.advertisements',
 ]
 
 MIDDLEWARE = [
