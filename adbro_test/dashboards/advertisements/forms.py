@@ -42,8 +42,8 @@ class CreateAdvertisement(forms.Form):
             advertisement_group = AdvertisementGroup.objects.create(campaign=campaign, 
                                                                     name=self.cleaned_data.get('advertisement_group'))
             AdvertisementGroupTargetingRule.objects.create(advertisement_group=advertisement_group,
-                                                        tags=self.cleaned_data.get('tags'),
-                                                        description=self.cleaned_data.get('description'))
+                                                           tags=self.cleaned_data.get('tags'),
+                                                           description=self.cleaned_data.get('description'))
             advertisement = Advertisement.objects.create(advertisement_group=advertisement_group,
                                                         data=self.cleaned_data.get('advertisement'))
             bulk_create_denormalized_advertisements = []

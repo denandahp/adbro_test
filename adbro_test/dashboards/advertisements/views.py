@@ -2,13 +2,16 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from adbro_test.apps.publishers.model import Publisher
 from adbro_test.apps.advertisement_views.model import DenormalizedAdvertisement
 from adbro_test.dashboards.advertisements.forms import CreateAdvertisement
 from adbro_test.core.utils import PaginatorPage
 
 
 def index_advertisement(request):
+    '''
+    This function is to display a list of advertisements base on 
+    DenormalizedAdvertisement model with pagination
+    '''
     page = request.GET.get('page', 1)
     limit = request.GET.get('limit', 10)
     advertisements = DenormalizedAdvertisement.objects.all().order_by('-created')
@@ -23,6 +26,9 @@ def index_advertisement(request):
 
 
 def create_advertisement(request):
+    '''
+    This function is to create new advertisements and DenormalizedAdvertisement
+    '''
     form = CreateAdvertisement(data=request.POST or None)
 
     if request.method == 'POST':
