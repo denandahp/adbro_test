@@ -12,13 +12,12 @@
    https://github.com/denandahp/adbro_test.git
    ```
 2. Create a [python virtual environment and activate it](https://docs.python.org/3/library/venv.html)
-3. install dependencies:
-4. pip install -r requirements.txt
+3. Install dependencies:
 
    ```
    pip install -r requirements.txt
    ```
-5. Migrate the app to create database table
+4. Migrate the app to create database table
 
    ```
    python manage.py migrate
