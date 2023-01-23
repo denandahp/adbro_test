@@ -21,7 +21,6 @@ class CreateSlot(forms.ModelForm):
         self.is_update = self.instance.id
         self.fields['sites'].queryset = Site.objects.filter(publisher=publisher)
         if self.is_update:
-            self.fields['sites'].widget = forms.HiddenInput()
             self.fields['sites'].initial = Site.objects.filter(guid=self.instance.site.guid)
 
     def save(self):
