@@ -78,9 +78,9 @@
 
 ###### Explanation of paths
 
-1. Dashboard Publihsers
+1. **Dashboard Publihsers**
 
-   * Create a new publisher
+   * **Create a new publisher**
      * Access URL : 127.0.0.1:8000/dashboards/publishers/add/publishers
      * Fields:
 
@@ -93,7 +93,7 @@
    ![1674435929113](image/README/1674435929113.png)
 
 
-   * Create new site
+   * **Create new site**
 
      * Access URL : 127.0.0.1:8000/dashboards/dashboards/publishers/add/slot/:uuid_publisher
      * Parameter:
@@ -106,7 +106,7 @@
      | Name Site      | string | Name of site                  |
 
      ![1674436134699](image/README/1674436134699.png)
-   * Create new slot
+   * **Create new slot**
 
      * Access URL : 127.0.0.1:8000/dashboards/publishers/add/site/:uuid_publisher
      * Parameter:
@@ -119,7 +119,7 @@
      | Name Site | Lisf of Object | List of sites that have been registered with a publisher |
 
      ![1674436449035](image/README/1674436449035.png)
-   * Update publisher name
+   * **Update publisher name**
 
      * Access URL : 127.0.0.1:8000/dashboards/publishers/edit/publishers/:uuid_publisher
      * Parameter:
@@ -131,7 +131,7 @@
      | Publisher Name | String | Name of publisher |
 
      ![1674436559105](image/README/1674436559105.png)
-   * Update site name
+   * **Update site name**
 
      * Access URL : 127.0.0.1:8000/dashboards/publishers/edit/site/:uuid_site
      * Parameter:
@@ -143,7 +143,7 @@
      | Name Site | String | Name of site |
 
      ![1674436667406](image/README/1674436667406.png)
-   * Update slot name
+   * **Update slot name**
 
      * Access URL : 127.0.0.1:8000/dashboards/publishers/edit/slot/:uuid_slot
      * Parameter:
@@ -155,9 +155,9 @@
      | Name Slot | String | Name of slot |
 
      ![1674436833122](image/README/1674436833122.png)
-2. Dashboard Advertisemenets
+2. **Dashboard Advertisemenets**
 
-   * Create new advertisements and DenormalizedAdvertisement
+   * **Create new advertisements and DenormalizedAdvertisement**
 
      * Access URL : 127.0.0.1:8000/dashboards/advertisements/add
      * Fields:
