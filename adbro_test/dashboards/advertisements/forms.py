@@ -1,10 +1,9 @@
 from django import forms
 from django.db import transaction
 
-from adbro_test.apps.advertisement_views.model import DenormalizedAdvertisement
 from adbro_test.apps.advertisements.model import (
     Advertiser, Campaign, AdvertisementGroup, AdvertisementGroupTargetingRule, Advertisement)
-from adbro_test.apps.publishers.model import Slot, Publisher
+from adbro_test.apps.publishers.model import Publisher
 
 
 class CreateAdvertisement(forms.Form):
@@ -23,17 +22,6 @@ class CreateAdvertisement(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['Publisher'].queryset = Publisher.objects.all()
-    
-    def clean(self):
-        data = super().clean()
-        if self.errors:
-            return data
-        publishers = data.get('Publisher')
-        self.slots = Slot.objects.select_related('site').filter(site__publisher__in=publishers)
-        if not self.slots:
-            error = forms.ValidationError('Slots is empty', code="invalid_Publisher")
-            self.add_error('Publisher', error)
-        return data
 
     def save(self):
         with transaction.atomic():
@@ -46,22 +34,4 @@ class CreateAdvertisement(forms.Form):
                                                            description=self.cleaned_data.get('description'))
             advertisement = Advertisement.objects.create(advertisement_group=advertisement_group,
                                                         data=self.cleaned_data.get('advertisement'))
-            bulk_create_denormalized_advertisements = []
-            for slot in self.slots:
-                denormalized_advertisement = DenormalizedAdvertisement(
-                    advertisement=advertisement.guid,
-                    group=advertisement_group.guid,
-                    campaign=campaign.guid,
-                    site=slot.site.guid,
-                    slot=slot.guid,
-                    tags=self.cleaned_data.get('tags'),
-                    data=self.cleaned_data.get('advertisement')
-                )
-                bulk_create_denormalized_advertisements.append(denormalized_advertisement)
-            if bulk_create_denormalized_advertisements:
-                    DenormalizedAdvertisement.objects.bulk_create(bulk_create_denormalized_advertisements)
-            
             return advertisement
-
-
-

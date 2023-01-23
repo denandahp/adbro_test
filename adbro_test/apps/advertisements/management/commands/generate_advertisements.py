@@ -79,32 +79,4 @@ class Command(BaseCommand):
             
             # Validate if bulk_create_advertisement_list is exist
             if bulk_create_advertisement_list:
-                advertisements = Advertisement.objects.bulk_create(bulk_create_advertisement_list)
-
-                # Create denormalized advertisement for each advertisement
-                bulk_create_denormalized_advertisements = []
-                for advertisement in advertisements:
-                    advertisement_group = advertisement.advertisement_group
-                    campaign = advertisement_group.campaign
-
-                    # Get all targeting rules from advertisement_group to get slot data
-                    targeting_rules = advertisement_group.advertisement_group_targeting_rules.all()
-                    for targeting_rule in targeting_rules:
-                        slots = targeting_rule.slot.all()
-                        for slot in slots:
-                            denormalized_advertisement = DenormalizedAdvertisement(
-                                advertisement=advertisement.guid,
-                                group=advertisement_group.guid,
-                                campaign=campaign.guid,
-                                site=slot.site.guid,
-                                slot=slot.guid,
-                                tags=targeting_rule.tags,
-                                data=advertisement.data
-                            )
-                            bulk_create_denormalized_advertisements.append(denormalized_advertisement)
-
-                # Validate if bulk_create_denormalized_advertisements is exist
-                if bulk_create_denormalized_advertisements:
-                    DenormalizedAdvertisement.objects.bulk_create(bulk_create_denormalized_advertisements)
-
-
+                Advertisement.objects.bulk_create(bulk_create_advertisement_list)

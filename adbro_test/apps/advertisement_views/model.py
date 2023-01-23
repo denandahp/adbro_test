@@ -11,3 +11,7 @@ class DenormalizedAdvertisement(models.Model):
     data = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        managed = False
+        db_table='denormalized_advertisement'
